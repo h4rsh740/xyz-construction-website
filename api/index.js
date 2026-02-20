@@ -11,8 +11,8 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// Serve static files from the current directory
-app.use(express.static(path.join(__dirname)));
+// Serve static files from the parent directory
+app.use(express.static(path.join(__dirname, '..')));
 
 // In-memory array to store messages (for demo purposes)
 const messages = [];
@@ -50,7 +50,7 @@ app.get('/api/messages', (req, res) => {
 // Catch-all route to serve the main index.html for any other requests
 // This allows the frontend to manage routing if needed later
 app.get(/.*/, (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
+    res.sendFile(path.join(__dirname, '..', 'index.html'));
 });
 
 // Export the app for Vercel's serverless platform
